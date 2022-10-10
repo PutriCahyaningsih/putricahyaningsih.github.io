@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<!--[if IE 8 ]><html class="no-js oldie ie8" lang="en"> <![endif]-->
+<!--[if IE 9 ]><html class="no-js oldie ie9" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+
+   <!--- basic page needs
+   ================================================== -->
+   <meta charset="utf-8">
+	<title>Putri</title>
+	<meta name="description" content="">  
+	<meta name="author" content="">
+
+   <!-- mobile specific metas
+   ================================================== -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+ 	<!-- CSS
+   ================================================== -->
+   <link rel="stylesheet" href="css/base.css">  
+   <link rel="stylesheet" href="css/styles.css">
+   <link rel="stylesheet" href="css/vendor.css">     
+
+   <!-- script
+   ================================================== -->   
+	<script src="js/modernizr.js"></script>
+	<script src="js/pace.min.js"></script>
+
+   <!-- favicons
+	================================================== -->
+	<link rel="icon" type="image/jpg" href="puput.jpg">
+
+</head>
+
+<body id="top">
+
+	<!-- header 
+   ================================================== -->
+   <header>   	
+   	<div class="row">
+
+   		<div class="top-bar">
+   			<a class="menu-toggle" href="#"><span>Menu</span></a>
+
+	   		<div class="logo">
+		         <a href="index.html">PUTRI</a>
+		      </div>		      
+
+		   	<nav id="main-nav-wrap">
+					<ul class="main-navigation">
+						<li class="current"><a class="nav-link"  href="index.html" title="">Home</a></li>
+						<li><a class="smoothscroll"  href="#webserver" title="">Webserver</a></li>
+						<li><a class="smoothscroll"  href="#database" title="">Database</a></li>
+						<li><a class="smoothscroll"  href="#union" title="">Kegunaan Union, Select, Wait dan --</a></li>
+						<li><a class="smoothscroll"  href="#hakakses" title="">Hak Akses</a></li>
+					</ul>
+				</nav>    		
+   		</div> <!-- /top-bar --> 
+   		
+   	</div> <!-- /row --> 		
+   </header> <!-- /header -->
+
+   <h1>Keamanan Basis Data</h1>
+   <h2>Membuat 3 Wordpress Menggunakan Database Terpisah</h2>
+ 	<div class="isi">
+		<img src="images/wordpress.jpg" class="depan">
+		<h3>Latar Belakang</h3>
+		<p>virtualisasi kini menjadi pilihan menarik bagi dunia usaha dan organisasi. Selain menghemat biaya juga menghemat energi, karena merupakan cara tepat untuk memangkas biaya server. Jika sebelumnya satu mesin server khusus untuk web server, database, file server, aplikasi server, web server. 
+			Dengan virtualisasi, semua fungsi tersebut dapat dijadikan dalam satu mesin server dengan didalamnya terdapat beberapa mesin virtual. Banyak aplikasi yang digunakan untuk membuat sebuah web server, antara lain apache, nginx, IIS dan lain – lain.			
+		</p>
+		<section id="webserver">
+   		<h3>Webserver</h3>
+		<p>Pada webserver, kita perlu mengintall beberapa package yaitu nginx, php, serta wordpress. IP address dari Webserver adalah 192.168.58.132. Berikut langkah-langkahnya : <br>
+			• Buka ubuntu server pada virtual machine, lalu masuk ke akses root <br>
+			<img src="images/isi/1.png" class="foto">
+			<br>	
+			•	install nginx <br>
+			# apt-get install apache2 <br>
+			<img src="images/isi/2.png" class="foto">
+			<br>
+			•	install PHP <br>
+			# apt-get install php-fpm php-curl php-mysql php-xml php-imagick php-unzip libapache2-mod-php <br>
+			<img src="images/isi/3.png" class="foto">
+			<br>
+			•	install wordpress <br>
+			# cd /var/www/html <br>
+			# wget -c https://wordpress.org/latest.zip <br>
+			<img src="images/isi/4.png" class="foto">
+			<br>
+			•	lalu unzip file latest.zip <br>
+			# unzip latest.zip -d wordpress1 <br>
+			# unzip latest.zip -d wordpress2 <br>
+			# unzip latest.zip -d wordpress3 <br>
+			<img src="images/isi/5.png" class="foto">
+			<br>
+			•	copy file wp-config-sample.php dengan nama wp-config.php <br>
+			# cp wordpress1/wp-config-sample.php wordpress1/wp-config.php <br>
+			# cp wordpress2/wp-config-sample.php wordpress2/wp-config.php <br>
+			# cp wordpress3/wp-config-sample.php wordpress3/wp-config.php <br>
+			<br>
+			•	buka file wp-config.php <br>
+			# nano wp-config.php <br>
+			<img src="images/isi/6.png" class="foto">
+			<br>
+			•	lalu ubah parameternya sesuai dengan data yang kita buat pada wordpress1/wp-config.php : <br>
+			<img src="images/isi/7.png" class="foto">
+			<br>
+			# “database_name_here” menjadi “wordpress1” <br>
+			# “username_here” menjadi “wp1user” <br>
+			# “password_here” menjadi “wp1pwuser” <br>
+			# “localhost” menjadi ip address server 2 (database) “192.168.58.134” <br>
+			<br>
+			pada wordpress2/wp-config.php : <br>
+			<img src="images/isi/8.png" class="foto">
+			<br>
+			# “database_name_here” menjadi “wordpress2” <br>
+			# “username_here” menjadi “wp2user” <br>
+			# “password_here” menjadi “wp2pwuser” <br>
+			# “localhost” menjadi ip address server 2 (database) “192.168.58.134” <br>
+			<br>
+			pada wordpress3/wp-config.php : <br>
+			<img src="images/isi/9.png" class="foto">
+			<br>
+			# “database_name_here” menjadi “wordpress3” <br>
+			# “username_here” menjadi “wp3user” <br>
+			# “password_here” menjadi “wp3pwuser” <br>
+			# “localhost” menjadi ip address server 2 (database) “192.168.58.134” <br>
+			<br/>
+		</p>
+		</section>
+		<section id="database">
+		<h3>Database</h3>
+		<p> Pada database, kita perlu menginstall mariadb serta mengkonfigurasi mysql nya. IP address dari Database adalah 192.168.58.134. Berikut langkah-langkahnya :  <br>
+			• Install mariadb server dan client <br>
+			# apt-get install mariadb-client mariadb-server <br>
+			<br>
+			• Konfigurasi mysql <br>
+			# mysql_secure_installation <br>
+			<br>
+			• Membuat database mysql <br>
+			# mysql -u root <br>
+			<img src="images/isi/10.png" class="foto">
+			<br>
+			# create database wordpress1 <br>
+			# create database wordpress2 <br>
+			# create database wordpress3 <br>
+			<br>
+			# grant all on wordpress1.* to ‘wp1user’@’192.168.58.132’ identified by ‘wp1pwuser’; <br>
+			# grant all on wordpress2.* to ‘wp2user’@’192.168.58.132’ identified by ‘wp2pwuser’; <br>
+			# grant all on wordpress3.* to ‘wp3user’@’192.168.58.132’ identified by ‘wp3pwuser’; <br>
+			<img src="images/isi/11.png" class="foto">
+			<br>
+			• Flush privileges guna untuk mereload / membaca ulang table hak akses. <br>
+			# Flush privileges <br>
+			<br>
+			• Konfigurasi listen database, mengubah ‘127.0.0.1’ menjadi ‘0.0.0.0’ pada file 50-server.conf <br>
+			# sed -i “s|127.0.0.1|0.0.0.0|g” /etc/mysql/mariadb.conf.d/50-server.conf <br>
+			<img src="images/isi/12.png" class="foto">
+			<br/>
+		</p>
+		</section>
+		<section id="union">
+		<h3>Kegunaan Union, Select, Wait dan --</h3>
+		<p>Union <br>
+			Union pada mysql digunakan untuk menggabungkan 2 tabel atau lebih ke dalam sebuah hasil. Terdapat 2 syntax union yang dapat digunakan, yaitu UNION dan UNION ALL. <br>
+			# select name from moviestar union select starName from starsin; <br>
+			<img src="images/isi/13.png" class="foto">
+			<br>
+			Perintah tersebut akan menampilkan data yang sama didalam kolom name dan starName. Table tersebut berisi 48 rows. <br>
+			<img src="images/isi/14.png" class="foto">
+			<br>
+			# select name from moviestar union all select starName from starsin; <br>
+			<img src="images/isi/15.png" class="foto">
+			<br>
+			Sedangkan perintah tersebut akan menggabungkan semua data walaupun nilainya sama. Tabel tersebut berisi 103 rows. <br>
+			<img src="images/isi/16.png" class="foto">
+			<br>
+			Select <br>
+			Perintah select pada MySQL adalah perintah yang digunakan untuk menampilkan data dari tabel yang ada di database dan dapat juga menjadi sebuah ekspesi. Namun pada dasarnya, perintah select berfungsi untuk menampilkan data pada tabel secara keseluruhan. Berikut contoh penggunaan select pada mysql : <br>
+			# select * from studio;  <br>
+			<img src="images/isi/17.png" class="foto">
+			<br>
+			Perintah tersebut digunakan untuk menampilkan semua data yang ada di dalam table studio. <br>
+			<br>
+			Untuk menampilkan data tertentu dari suatu table, gunakan perintah select (nama kolom) from (nama table); <br>
+			# select name, pres from studio; <br>
+			<img src="images/isi/18.png" class="foto">
+			<br>
+			Wait (Sleep) <br>
+			Sleep pada mysql membantu untuk menguji query asinkron serta query yang berjalan lambat. Terdapat 2 opsi, yaitu SLEEP dan DO SLEEP. <br>
+			# select name, sleep(2) from studio; <br>
+			<img src="images/isi/19.png" class="foto">
+			<br>
+			Dari SQL di atas, sleep() mengambil angka 10 sebagai parameter. Angka ini menentukan jumlah detik yang akan ditempati di utas server. <br>
+			<br>
+			# do sleep(2) <br>
+			<img src="images/isi/20.png" class="foto">
+			<br>
+			Fungsi do sleep() tidak akan menampilkan hasil apapun. Ia akan menunggu beberapa detik sesuai dengan parameter yang diinput, setelah itu ia tidak akan menampilkan hasil apapun seperti gambar diatas. <br>
+			<br/>
+		</p>
+		</section>
+		<section id="hakakses">
+		<h3>Hak Akses</h3>
+		<p>Pada Mysql kita dapat mengatur hak akses sampai tingkat kolom pada tiap user. Semua pengaturan hak akses (privileges) tersimpan di database Mysql yang secara default sudah ada di sistem Mysql. <br>
+			Ada banyak perintah hak akses, contohnya all, create, delete, drop, insert, select, update dan lain-lain. Untuk menambahkan hak akses, kita dapat menambahkan perintah grant. <br>
+			# grant all on wordpress1.* to ‘wp1user’@’192.168.58.132’ identified by ‘wp1pwuser’; <br>
+			<img src="images/isi/21.png" class="foto">
+			<br>
+			Grant all berfungsi untuk memberikan semua hak akses kepada sebuah user. Kita juga bisa membuat hak akses tertentu saja pada user. <br>
+			# grant insert on putri.mahasiswa_baru to ‘insertuser’@’192.168.58.132’ identified by ‘putri’; <br>
+			<img src="images/isi/22.png" class="foto">
+			<br>
+			Perintah ini berfungsi untuk memberikan hak akses insert kepada insertuser dengan host 192.168.58.132 pada database putri, tabel mahasiswa_baru. <br>
+			<br/>
+		</p>
+		</section>
+	</div>
+	<h2>Hasil Luaran</h2>
+	<div class="isi">
+		<img src="images/isi/luaran-1.png" class="fotoluaran">
+		<img src="images/isi/luaran-2.png" class="fotoluaran">
+		<img src="images/isi/luaran-3.png" class="fotoluaran">
+		<p>Fungsi utama Server atau Web server adalah untuk melakukan atau akan mentransfer berkas permintaan pengguna melalui protokol komunikasi yang telah ditentukan sedemikian rupa. halaman web yang diminta terdiri dari berkas teks, video, gambar, file dan banyak lagi. pemanfaatan web server berfungsi untuk mentransfer seluruh aspek pemberkasan dalam sebuah halaman web termasuk yang di dalam berupa teks, video, gambar dan banyak lagi.
+		MySQL adalah sebuah software yang berfungsi untuk membuat dan mengelola berbagai informasi yang ada pada database di dalam sebuah server dengan bahasa pemrograman SQL. Sedangkan wordpress adalah aplikasi open source yang digunakan sebagai blog engine.		
+		</p>
+	</div>
+   <!-- Java Script
+   ================================================== --> 
+   <script src="js/jquery-2.1.3.min.js"></script>
+   <script src="js/plugins.js"></script>
+   <script src="js/main.js"></script>
+
+</body>
+
+</html>
